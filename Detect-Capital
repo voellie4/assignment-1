@@ -1,0 +1,17 @@
+#Language: python3
+
+class Solution:
+    def detectCapitalUse(self, word: str) -> bool:
+        count = 0
+        for w in word:
+            if ord(w) < 97:
+                count+=1
+        #all lower
+        if count==0: return True
+        #all upper
+        elif count==len(word): return True
+        #first word is upper
+        elif count==1: 
+            if ord(word[0])<97: return True
+            else: return False
+        else: return False
