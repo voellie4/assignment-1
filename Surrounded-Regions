@@ -1,0 +1,59 @@
+#language: python
+
+class Solution(object):
+    def solve(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: None Do not return anything, modify board in-place instead.
+        """
+        if not board:
+            return board
+
+        if board is [['O']]:
+            return board
+
+		# not allow 1 row board
+        if len(board) == 1:
+            return board
+
+        length = len(board)
+        width = len(board[length - 1])
+        board = self.OAtBorder(board, length, width)
+
+        for r in range(length):
+            for c in range(width):
+                if board[r][c] == 'O':
+                    board[r][c] = 'X'
+                elif board[r][c] == 'M':
+                    board[r][c] = 'O'
+
+        return board
+
+    def OAtBorder(self, board, length, width):
+        #O on left and right edges
+        for i in range(length):
+            if board[i][0] == 'O':
+                board = self.changeOtoM(board, i, 0, length, width)
+            if board[i][width - 1] == 'O':
+                board = self.changeOtoM(board, i, width - 1, length, width)
+        #O on top and bottom edges
+        for i in range(width):
+            if board[0][i] == 'O':
+                board = self.changeOtoM(board, 0, i, length, width)
+            if board[length - 1][i] == 'O':
+                board = self.changeOtoM(board, length - 1, i, length, width)
+        return board
+
+    def changeOtoM(self, board, r, c, length, width):
+        #validate row, col indexes and skip X and A at current position
+        if r < 0 or r >= length or c < 0 or c >= width or board[r][c] in ['X', 'M']:
+            return board
+        #change O to M 
+        if board[r][c] == 'O':
+            board[r][c] = 'M'
+            board = self.changeOtoM(board, r - 1, c, length, width)
+            board = self.changeOtoM(board, r, c - 1, length, width)
+            board = self.changeOtoM(board, r + 1, c, length, width)
+            board = self.changeOtoM(board, r, c + 1, length, width)
+
+        return board
