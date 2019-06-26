@@ -1,0 +1,25 @@
+#language: python3
+
+class Solution:
+    def binaryGap(self, N: int) -> int:
+        stack = []
+        currentIndex = 0
+        maxDistance = 0
+        while N>0:
+            #step 1
+            remainder = N%2
+            N=N//2
+            #step 2
+            if remainder == 1:
+                if not stack:
+                    stack.append(currentIndex)
+                else:
+                    #step 2-1
+                    distance = currentIndex - stack.pop()
+                    #step 2-2
+                    if distance > maxDistance: 
+                        maxDistance = distance
+                    #step 2-3
+                    stack.append(currentIndex)
+            currentIndex = currentIndex+1
+        return maxDistance
