@@ -1,0 +1,21 @@
+#Language: python3
+
+class Solution:
+    def reverseVowels(self, s: str) -> str:
+        i = 0
+        j = len(s) - 1
+        vowels = "ueoaiUEOAI"
+        res = list(s)
+        while i<j:
+            if res[i] not in vowels:
+                i+=1
+                continue
+            if res[j] not in vowels:
+                j-=1
+                continue
+            temp = res[i]
+            res[i] = res[j]
+            res[j] = temp
+            i+=1
+            j-=1
+        return "".join(res)        
