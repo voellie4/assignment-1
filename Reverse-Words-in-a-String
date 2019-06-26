@@ -1,0 +1,14 @@
+#Language: python
+
+class Solution(object):
+    def reverseWords(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        words = s.split(" ")
+        reverseStr =''
+        for word in words:
+            word = word[::-1]
+            reverseStr = reverseStr+" "+word
+        return reverseStr.strip()  
