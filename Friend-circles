@@ -1,0 +1,17 @@
+Language: python3
+
+class Solution:
+    def findCircleNum(self, M: List[List[int]]) -> int:
+        visited = set()
+        counter = 0
+        for i in range (len(M)):
+            if i not in visited:
+                counter+=1
+                self.dfs(i, M, visited)
+        return counter
+    
+    def dfs (self, i: int, M: List[List[int]], visited: set()):
+        for j, friend in enumerate(M[i]):
+            if j not in visited and friend == 1:
+                visited.add(j)
+                self.dfs(j, M, visited)
