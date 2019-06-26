@@ -1,0 +1,12 @@
+#Language: Python
+
+class Solution(object):
+    def titleToNumber(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        sum = 0
+        for i in range(0,len(s)):
+            sum+= (ord(s[i])-64)*26**(len(s)-1-i)
+        return sum
