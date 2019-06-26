@@ -1,0 +1,19 @@
+//Language: java
+
+class Solution {
+    public int singleNumber(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        //step 1
+        for (int i=0; i<nums.length; i++) {
+            if(map.containsKey(nums[i]) && map.get(nums[i])!=i) {
+                int temp = map.remove(nums[i]);
+            }
+            else {
+                map.put(nums[i],i);
+            }
+        }
+        //step 2
+        Map.Entry<Integer, Integer> entry = map.entrySet().iterator().next();
+        return entry.getKey();
+    }
+}
