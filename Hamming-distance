@@ -1,0 +1,31 @@
+#Language: python3
+
+class Solution:
+    def convertToBinary(self, num:int) -> string:
+        x=""
+        if num == 1: x = "1"
+        elif num == 0: x = "0"
+        else:
+            while num>0:
+                remainder = num%2
+                num=num//2
+                x = str(remainder) + x
+        return x
+    
+    def hammingDistance(self, x: int, y: int) -> int:
+        #----step 1
+        str1 = self.convertToBinary(x)
+        str2 = self.convertToBinary(y)
+        #----step 2
+        if len(str1) < len(str2):
+            str1 = str1.zfill(len(str2))
+        if len(str2) < len(str1):
+            str2 = str2.zfill(len(str1))
+        #----step 3
+        count = 0
+        for i in range (0,len(str1)):
+            if str1[i] != str2[i] :
+                count = count + 1
+        return count
+    
+    
